@@ -2,7 +2,7 @@
   "name": "websockets-nodejs",
   "version": "1.0.0",
   "description": "📌 Description: Create an API to manage tasks in real time (adding, updating, deleting) with instant notifications via WebSockets.\r 🔹 Features:\r ● Task CRUD operations\r ● Status management (in progress, completed, canceled, etc.)\r ● Real-time notifications with Socket.io\r ● User authentication and management\r ● Dashboard with task statistics",
-  "main": "config.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
