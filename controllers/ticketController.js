@@ -16,3 +16,19 @@ exports.createTicket = async (req, res) => {
       res.status(400).json({ message: error.message });
     }
   };
+
+
+  exports.closeTicket = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const ticket = await Ticket.findOneAndUpdate(
+        { _id: id, user: req.user._id },
+        { status: "closed" },
+        { new: true }
+      );
+  
+      res.json(ticket);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  };
