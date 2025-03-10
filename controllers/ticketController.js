@@ -67,3 +67,14 @@ exports.createTicket = async (req, res) => {
     }
   };
   
+  exports.getTickets = async (req, res) => {
+    try {
+      const tickets = await Ticket.find({ user: req.user._id }).populate(
+        "user",
+        "name email"
+      );
+      res.json(tickets);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  };
