@@ -15,6 +15,21 @@ const app = express();
 
 connectDB();
 
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev")); // Use Morgan
+
+
+
+
+
+
+
+
+
+
 
 const PORT = process.env.PORT || 9092;
 app.listen(PORT, () => {
