@@ -65,6 +65,10 @@ app.get("/", (req, res) => {
   const adminRoutes = require("./routes/adminRoutes");
 app.use("/api/admin", adminRoutes);
 
-const setupSwagger = require("./src/swagger/swaggerDocs");
+const setupSwagger = require("./swagger/swaggerDocs");
+
 setupSwagger(app);
+
+const dashboardRoutes = require("./routes/dashboardRoutes");
+// app.use("/dashboard", dashboardRoutes);
 module.exports = app;

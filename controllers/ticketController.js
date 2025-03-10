@@ -122,14 +122,16 @@ exports.createTicket = async (req, res) => {
   };
 
   // Fonction pour envoyer un email + logs
-const sendStatusChangeEmail = async (to, ticketTitle, oldStatus, newStatus) => {
+  const sendStatusChangeEmail = async (to, ticketTitle, oldStatus, newStatus) => {
     try {
-      // Transporteur email (exemple Gmail, à adapter)
+      // Transporteur email (exemple Outlook)
       const transporter = nodemailer.createTransport({
-        service: "Gmail",
+        host: "smtp.office365.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
         auth: {
           user: process.env.EMAIL_USER, // Email via .env
-          pass: process.env.EMAIL_PASS, // Password via .env (ou App password si Gmail)
+          pass: process.env.EMAIL_PASS, // Password via .env
         },
       });
   

@@ -31,5 +31,28 @@ router.put("/makeAdmin/:userToUpdate", auth, async (req, res) => {
 
 
 
+/**
+ * @swagger
+ * /api/admin/makeAdmin/{userToUpdate}:
+ *   put:
+ *     summary: Promote a user to admin
+ *     description: Only admins can promote other users to admin.
+ *     parameters:
+ *       - in: path
+ *         name: userToUpdate
+ *         required: true
+ *         description: ID of the user to promote
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: User promoted successfully
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
+ */
 
 module.exports = router;
