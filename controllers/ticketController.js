@@ -120,3 +120,34 @@ exports.createTicket = async (req, res) => {
       res.status(400).json({ message: error.message });
     }
   };
+
+  // Fonction pour envoyer un email + logs
+const sendStatusChangeEmail = async (to, ticketTitle, oldStatus, newStatus) => {
+    try {
+      // Transporteur email (exemple Gmail, à adapter)
+      const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: process.env.EMAIL_USER, // Email via .env
+          pass: process.env.EMAIL_PASS, // Password via .env (ou App password si Gmail)
+        },
+      });
+  
+      console.log("Email : " + process.env.EMAIL_USER);
+      console.log("Password : " + process.env.EMAIL_PASS);
+  
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: to, // Email du destinataire
+        subject: "Mise à jour du statut de votre ticket",
+        text: `Bonjour,\n\nLe statut de votre ticket "${ticketTitle}" a changé de "${oldStatus}" à "${newStatus}".\n\nCordialement,`,
+      };
+  
+      // Envoi d'email + log succès
+      const info = await transporter.sendMail(mailOptions);
+      console.log("✅ Email envoyé avec succès :", info.response);
+    } catch (error) {
+      // Log en cas d'erreur
+      console.error("❌ Erreur lors de l'envoi d'email :", error);
+    }
+  };
