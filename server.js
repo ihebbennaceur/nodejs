@@ -25,8 +25,14 @@ app.use(morgan("dev")); // Use Morgan
 
 
 
+// Configurer le dossier des fichiers statiques
+app.use(express.static(path.join(__dirname, "public")));
 
 
+// Configurer le dossier des vues
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "html");
+app.engine("html", require("ejs").renderFile);
 
 
 
