@@ -9,7 +9,7 @@ connectDB();
 
 
 
-PORT=6000;
+PORT=9092;
 app.listen(PORT,()=>{ console.log(`Server is running on port ${PORT}`);});
 
 

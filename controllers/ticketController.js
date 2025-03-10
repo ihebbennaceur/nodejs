@@ -78,3 +78,45 @@ exports.createTicket = async (req, res) => {
       res.status(400).json({ message: error.message });
     }
   };
+
+
+  exports.updateTicket = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { title, description, status } = req.body;
+  
+      // 1. Récupérer l'ancien ticket
+      const oldTicket = await Ticket.findOne({ _id: id, user: req.user._id });
+      if (!oldTicket) {
+        return res.status(404).json({ message: "Ticket non trouvé." });
+      }
+  
+      // 2. Mise à jour du ticket
+      const updatedTicket = await Ticket.findOneAndUpdate(
+        { _id: id, user: req.user._id },
+        {
+          title: title ? title : oldTicket.title,
+          description: description ? description : oldTicket.description,
+          status: status ? status : oldTicket.status,
+        },
+        { new: true }
+      );
+  
+      // 3. Vérification de changement de statut
+      if (status && oldTicket.status !== status) {
+        // 4. Envoi d'email
+        await sendStatusChangeEmail(
+          req.user.email, // Email de l'utilisateur connecté (assume que tu as "email" dans ton user)
+          updatedTicket.title,
+          oldTicket.status,
+          updatedTicket.status
+        );
+      }
+  
+      // 5. Réponse
+      res.json(updatedTicket);
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({ message: error.message });
+    }
+  };
