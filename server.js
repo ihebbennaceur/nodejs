@@ -46,4 +46,19 @@ app.use("/ping", (req, res) => {
     res.send("pong");
   });
 
+  // Routes pour servir les pages HTML
+app.get("/", (req, res) => {
+    res.render("index");
+  });
+  
+  app.get("/login", (req, res) => {
+    res.render("login");
+  });
+  
+  app.get("/register", (req, res) => {
+    res.render("register");
+  });
+  
+  app.use("/", authRoutes);
+  app.use("/api/tickets", ticketRoutes);
 module.exports = app;
