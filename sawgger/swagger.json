@@ -1,0 +1,250 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "API documentation for the Node.js application.",
+      "version": "1.0.0",
+      "title": "Node.js Application API"
+    },
+    "host": "localhost:9092",
+    "basePath": "/api",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/ping": {
+        "get": {
+          "summary": "Ping the server",
+          "description": "Returns a simple pong response.",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "summary": "User login",
+          "description": "Authenticate a user and return a token.",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User login credentials",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful login",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      },
+      "/auth/register": {
+        "post": {
+          "summary": "User registration",
+          "description": "Register a new user.",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User registration details",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "email", "password"]
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User registered successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          }
+        }
+      },
+      "/api/tickets": {
+        "get": {
+          "summary": "Get all tickets",
+          "description": "Retrieve a list of all tickets.",
+          "responses": {
+            "200": {
+              "description": "A list of tickets",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Ticket"
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new ticket",
+          "description": "Create a new ticket.",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Ticket details",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Ticket"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Ticket created successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          }
+        }
+      },
+      "/api/tickets/{id}": {
+        "get": {
+          "summary": "Get a ticket by ID",
+          "description": "Retrieve a ticket by its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A ticket object",
+              "schema": {
+                "$ref": "#/definitions/Ticket"
+              }
+            },
+            "404": {
+              "description": "Ticket not found"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a ticket",
+          "description": "Update a ticket by its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Updated ticket details",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Ticket"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Ticket updated successfully"
+            },
+            "404": {
+              "description": "Ticket not found"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a ticket",
+          "description": "Delete a ticket by its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Ticket deleted successfully"
+            },
+            "404": {
+              "description": "Ticket not found"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Ticket": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["title", "description", "status"]
+      }
+    }
+  }

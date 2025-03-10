@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../middleware/auth"); // Add this line to require the auth middleware
 
 router.put("/makeAdmin/:userToUpdate", auth, async (req, res) => {
     try {
