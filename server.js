@@ -61,4 +61,7 @@ app.get("/", (req, res) => {
   
   app.use("/", authRoutes);
   app.use("/api/tickets", ticketRoutes);
+
+  const adminRoutes = require("./routes/adminRoutes");
+app.use("/api/admin", adminRoutes);
 module.exports = app;
