@@ -1,4 +1,4 @@
-const Ticket = require("../models/Ticket");
+const Ticket = require("../models/ticket");
 const nodemailer = require("nodemailer"); 
 const User = require("../models/user");
 
