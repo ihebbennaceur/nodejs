@@ -1,8 +1,8 @@
-# WebSockets-nodejs
-## Description: Create an API to manage tasks in real time (adding, updating, deleting) with instant notifications via WebSockets.
-# Features:
-### Task CRUD operations
-### Status management (in progress, completed, canceled, etc.)
-### Real-time notifications with Socket.io
-### User authentication and management
-### Dashboard with task statistics
+3️⃣ Support Ticket Management System
+📌 Description: Develop a platform where users can submit technical support tickets and track their resolution.
+🔹 Features:
+● Authentication (users and administrators)
+● Ticket creation, updates, and closure
+● Ticket assignment to support agents
+● Email notifications on ticket status
+● Dashboard for performance tracking
