@@ -56,3 +56,5 @@ methode : get
 ## delete ticket : 
 {{base_url}}/api/tickets/67cffe2317c3908d7deedde3
 
+## make user admin : 
+{{base_url}}/api/admin/makeAdmin/67cffb7fdac9dadcc94b9fbb
