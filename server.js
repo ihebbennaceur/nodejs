@@ -21,21 +21,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev")); // Use Morgan
 
-
-
-
-
 // Configurer le dossier des fichiers statiques
 app.use(express.static(path.join(__dirname, "public")));
-
 
 // Configurer le dossier des vues
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "html");
 app.engine("html", require("ejs").renderFile);
-
-
-
 
 const PORT = process.env.PORT || 9092;
 app.listen(PORT, () => {
@@ -43,26 +35,27 @@ app.listen(PORT, () => {
 });
 
 app.use("/ping", (req, res) => {
-    res.send("pong");
-  });
+  res.send("pong");
+});
 
-  // Routes pour servir les pages HTML
+// Routes pour servir les pages HTML
 app.get("/", (req, res) => {
-    res.render("index");
-  });
-  
-  app.get("/login", (req, res) => {
-    res.render("login");
-  });
-  
-  app.get("/register", (req, res) => {
-    res.render("register");
-  });
-  
-  app.use("/", authRoutes);
-  app.use("/api/tickets", ticketRoutes);
+  res.render("index");
+});
 
-  const adminRoutes = require("./routes/adminRoutes");
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+app.use("/", authRoutes);
+app.use("/api/tickets", ticketRoutes);
+app.use("/api/users", require("./routes/userRoute"));
+
+const adminRoutes = require("./routes/adminRoutes");
 app.use("/api/admin", adminRoutes);
 
 const setupSwagger = require("./swagger/swaggerDocs");
