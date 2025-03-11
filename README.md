@@ -53,4 +53,6 @@ methode : get
 ## close ticket
 /api/tickets/67cffe2317c3908d7deedde3/close
 
+## delete ticket : 
+{{base_url}}/api/tickets/67cffe2317c3908d7deedde3
 
